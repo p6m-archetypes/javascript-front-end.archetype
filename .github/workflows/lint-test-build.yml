@@ -9,7 +9,7 @@ permissions: write-all
 
 env:
   GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-  ARTIFACTORY_TOKEN: ${{ secrets.ARTIFACTORY_TOKEN }}
+  ARTIFACTORY_TOKEN: ${{ secrets.P6M_ARTIFACTORY_TOKEN }}
   NODE_OPTIONS: --max_old_space_size=4096
 
 jobs:

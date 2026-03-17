@@ -13,4 +13,4 @@ jobs:
     with:
       REACT_APP_ENV: "dev"
     secrets:
-      ARTIFACTORY_TOKEN: ${{'{'}}{ secrets.ARTIFACTORY_TOKEN }}
+      ARTIFACTORY_TOKEN: ${{'{'}}{ secrets.P6M_ARTIFACTORY_TOKEN }}
