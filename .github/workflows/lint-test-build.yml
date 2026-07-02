@@ -36,25 +36,23 @@ jobs:
         run: |
           echo "STORE_PATH=$(pnpm store path --silent)" >> $GITHUB_ENV
 
-      - name: Install Rust Toolchain
-        uses: actions-rs/toolchain@v1
-        with:
-          toolchain: stable
-
-      - name: Install archetect from source
+      - name: Install Archetect 2 (prebuilt release binary)
         run: |
-            cargo install --git https://github.com/archetect/archetect.git archetect
-
-      # - name: Install archetect from crates.io
-      #   uses: baptiste0928/cargo-install@v2
-      #   with:
-      #     crate: archetect
+          curl -fsSL https://github.com/archetect/archetect/releases/download/v2.1.2/archetect-v2.1.2-linux-x86_64.tar.gz -o /tmp/archetect.tar.gz
+          tar -xzf /tmp/archetect.tar.gz -C /tmp
+          sudo install -m 0755 /tmp/archetect-v2.1.2-linux-x86_64/archetect /usr/local/bin/archetect
 
       - name: archetect version
         run: archetect --version
 
       - name: archetect render
-        run: archetect render ${{ github.workspace }}
+        run: |
+          archetect render --headless \
+            -a org-name=example \
+            -a solution-name=frontend \
+            -a pnpm_install=false \
+            -a git_init=false \
+            ${{ github.workspace }}
 
       - name: generate react app
         run: |
